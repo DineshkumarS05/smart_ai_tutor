@@ -1,0 +1,94 @@
+{% extends 'dashboard-base.html' %}
+
+{% block title %}Upload Lesson{% endblock title %}
+
+{% block content %}
+
+
+
+
+<!-- class Lesson(models.Model):
+    id = models.AutoField(primary_key=True)
+    lesson_number = models.IntegerField(default=1, unique=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
+    lesson_title = models.CharField(max_length=255, default='Lesson')
+    lesson_video = CloudinaryField('lesson_video', null=True)
+    paragraph1 = models.TextField()
+    paragraph2 = models.TextField()
+    paragraph3 = models.TextField() -->
+
+<h1>Upload Lesson</h1> 
+<form class='lesson-upload' method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="lessons-container">
+        <h1>{{course.title}}</h1> 
+        <div class="lesson">
+            <label for="lesson_no">Lesson Number:</label>
+            <input type="text" name="lesson_no" required>
+            <label for="lesson_title">Lesson Title:</label>
+            <input type="text" name="lesson_title" required>
+            <label for="lesson_video">Lesson Video:</label>
+            <input type="file" name="lesson_video" required>
+            <br><br>
+            <label for="paragraph1">Paragraph 1:</label>
+            <textarea name="paragraph1" required></textarea>
+            <label for="paragraph2">Paragraph 2:</label>
+            <textarea name="paragraph2" required></textarea>
+            <label for="paragraph3">Paragraph 3:</label>
+            <textarea name="paragraph3" required></textarea>
+        </div>
+    </div>
+    <br>
+    <button type="button" id="add-lesson-btn">Add Lesson</button>
+    
+    <button type="submit">Upload Lessons</button>
+</form>
+
+<style>
+    /* Add custom styles for the file input button */
+    
+        
+/*     
+
+     .lesson-upload input[type="file"]  {
+        
+        padding: 8px 12px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .lesson-upload label.file-label:hover {
+        background-color: #45a049;
+    }
+ */
+
+
+
+    .lesson-upload {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.03);
+        padding: 2rem;
+    }
+    label {
+        margin-bottom: .5rem;
+        display: block;
+    }
+    .lesson-upload p {
+        margin: 1rem 0;
+    }
+    input, textarea {
+        width: 100%;
+    }
+    .lesson-upload a{
+        margin-bottom: 1rem;
+    }
+
+</style>
+
+
+</script>
+
+{% endblock %}

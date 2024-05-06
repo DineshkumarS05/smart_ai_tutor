@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Content</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  
+    
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+    
+        /* Body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            align-items: stretch;
+        }
+    
+        /* Container */
+        .container {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            height: 100vh;
+        }
+    
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 auto;
+            background-color: rgba(135, 16, 216, 1);
+            color: #fff;
+            padding: 20px;
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+    
+        .sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+    
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .sidebar li {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            border-color: white !important;
+            border-width: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+    
+        .sidebar li:hover {
+            transform: translateX(5px);
+        }
+    
+        .active {
+            font-weight: bold;
+        }
+    
+        /* Content */
+        .content {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            text-align: left;
+        }
+    
+        .content h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    
+        .module {
+            display: none;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    
+        .module.active {
+            display: block;
+        }
+    
+        .module h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: rgba(135, 16, 216, .8);
+        }
+    
+        .module p {
+            font-size: 1.1rem;
+            color: black;
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: "width" 100;
+            overflow: hidden;
+            word-wrap: break-word;
+            text-align: justify;
+            max-width: 100%;
+            padding: 20px;
+            padding-top: 30px;
+            margin-left: 15px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            position: relative;
+        }
+    
+        .module p:hover {
+            border-color: rgba(135, 16, 216, 1);
+        }
+    
+        .module p .btn-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+    
+        .module p:hover .btn-container {
+            display: block;
+        }
+    
+        .module p button {
+            margin-left: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #fff;
+            color: rgba(135, 16, 216, 0.8);
+            border: 2px solid rgba(135, 16, 216, 0.8);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+    
+        .module p button:hover {
+            background-color: rgba(135, 16, 216, 0.8);
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+        /* Chat Popup */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: 1px solid #ccc;
+            z-index: 9999;
+            width: 270px;
+            max-width: 400px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            border: 2px solid ;
+            margin-bottom: 70px;
+            border-color: rgba(135, 16, 216, 1);
+
+        
+            
+        }
+
+        .chat-popup .chat-container {
+            padding: 10px;
+        }
+
+        .chat-popup .chat-header {
+            background-color: rgba(135, 16, 216, 1);;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            margin-top: 6px;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
+
+        .chat-popup .chat-container .chat-body {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Chat Button */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .message-form {
+                margin-top: auto; /* Push the form to the bottom */
+                        }
+
+
+ messages-box {
+      flex: 1;
+      
+    }
+
+    .messages-list {
+      padding-left: 0;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      list-style: none;
+    }
+
+    .message-text {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .sent {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+    }
+
+    .received {
+      background-color: #f1f0f0;
+      align-self: flex-start;
+    }
+
+    .message-form {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background-color: #f8f9fa;
+    }
+
+    .message-input {
+      flex: 1;
+      border-radius: 0;
+      border-right: none;
+    }
+
+    .btn-send {
+      border-radius: 0;
+    }
+
+    .chat-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    #ichat{
+      border-radius: 50px;
+     
+  
+
+    }
+
+    .toggle-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style for the iframe container */
+    .iframe-container {
+
+
+
+      position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px; /* Adjust width as needed */
+    height: 400px; /* Adjust height as needed */
+    display: none; /* Initially hidden */
+    z-index: 9998; /* Ensure it's behind the button */
+    margin-bottom: 60px;
+    overflow: hidden; /* Hide the scrollbar */
+    border-radius: 5px;
+    }
+
+    .iframe-container iframe {
+      width: calc(100% + 20px); /* Add 20px to accommodate for scrollbar */
+      height: calc(100% + 20px); /* Add 20px to accommodate for scrollbar */
+      margin-right: -15px; /* Offset to hide scrollbar */
+      margin-top: -2px;
+      margin-right: -10px;
+
+
+        border: none;
+    }
+
+    .progress-bar-container {
+    width: 80%; /* Adjust the width as needed */
+    margin: 20px auto; /* Center the bar */
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    display: flex;
+    margin-top: 30px;
+}
+
+.progress-bar {
+    width: 0%; /* Change this dynamically */
+    height: 100%; 
+    background-color: rgba(135, 16, 216, 0.8);
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out; /* Add a smooth transition */
+}
+        
+    </style>
+</head>
+<body>
+    <div class="progress-bar-container">
+        <div class="progress-bar"></div> &nbsp;35 %
+    </div> 
+    <div class="container">
+
+        <div class="sidebar">
+            <h2>Course Contents</h2>
+            <ul>
+                {% for lesson in lessons %}
+                    <li onclick="changeContent({{ lesson.lesson_no }})">{{ lesson.lesson_title }}</li>
+                {% endfor %}
+            </ul> 
+        </div>
+        <div class="content">
+            <h1>{{ course.title }}</h1>
+            {% for lesson in lessons %}
+            {% csrf_token %}
+                <div id="module{{ lesson.lesson_no }}" class="module{% if forloop.first %} active{% endif %}">
+                    <h2>{{ lesson.lesson_title }}</h2>
+                    <center>
+                        <div>
+                            <video controls controlsList="nodownload">
+                                <source src="{{ lesson.lesson_video.url }}" type="{{ lesson.lesson_video.mime_type }}">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </center>
+                    <br><br><br>
+                    <p id ="p1">{{ lesson.paragraph1 }}<span class="btn-container"><button onclick="copyText(this)">Make it easy</button></span></p>
+                  
+                    <p>{{ lesson.paragraph2 }}<span class="btn-container"><button onclick="copyText(this)">Make it easy</button></p>
+                
+                    <p>{{ lesson.paragraph3 }}<span class="btn-container"><button onclick="copyText(this)">Make it easy</button></p>
+                    
+                  <!-- <iframe id="ichat" src="http://127.0.0.1:8000/chatbot/" frameborder="0" style="width: 100%; height: 500px;"></iframe> -->
+                  <div class="iframe-container">
+                    <iframe id="#ichat" src="http://127.0.0.1:8000/chatbot/"  frameborder="0" ></iframe>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<button class="toggle-button" onclick="toggleIframe()">
+    <i class="fa fa-comments"></i> 
+    
+</button>
+
+
+
+
+<!-- Container for the iframe -->
+<div class="iframe-container" id="iframeContainer">
+    <iframe src="http://127.0.0.1:8000/chatbot/" frameborder="0" ></iframe>
+</div>
+    
+
+    <script>
+        // Example:
+let courseCompletionPercentage = 35; // Get this value dynamically
+
+// Update the progress bar
+let progressBar = document.querySelector(".progress-bar");
+progressBar.style.width = courseCompletionPercentage + "%"; 
+
+
+        function changeContent(lessonNumber) {
+            // Hide all module content
+            var modules = document.querySelectorAll(".module");
+            modules.forEach(function(module) {
+                module.classList.remove("active");
+            });
+
+            // Show the selected module content
+            document.getElementById("module" + lessonNumber).classList.add("active");
+
+            // Update the active class on the sidebar
+            var sidebarItems = document.querySelectorAll(".sidebar li");
+            sidebarItems.forEach(function(item) {
+                item.classList.remove("active");
+            });
+            sidebarItems[lessonNumber - 1].classList.add("active");
+        }
+
+        // Function to copy text
+        function copyText(button) {
+            var paragraphText = button.parentNode.parentNode.textContent.trim();
+            modifyText(button,paragraphText);
+        }
+
+
+        function typeText(element, text, speed) {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+        }
+    }, speed);
+}
+
+        function modifyText(button,text) {
+          console.log("in modify text");
+    // Make an AJAX request to modify the text
+            fetch('/chatbot/modify-text/', {  // Update the URL to match your project structure
+              
+              method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // Ensure you have a CSRF token available in your template
+                  },
+                    body: JSON.stringify({ text: text })
+    })
+            .then(response => response.json())
+            .then(data => {
+                // Update the inner HTML of the <p> tag with the modified text
+              console.log("modified",data.response)
+                var modifiedText = data.response;
+
+                button.parentNode.parentNode.innerHTML = `${modifiedText} <span class="btn-container"><button onclick="copyText(this)">Make it easy</button>`;
+                // button.parentNode.parentNode.innerHTML = ``;
+                
+
+// Add button container after typing effect completes
+setTimeout(() => {
+  button.parentNode.parentNode.innerHTML += '<span class="btn-container"><button onclick="copyText(this)">Make it easy</button>';
+}, modifiedText.length * 50); 
+                // button.parentNode.innerHTML = modifiedText;
+            })
+            .catch(error => console.error('Error:', error));
+}
+
+
+
+function toggleIframe() {
+    var iframeContainer = document.getElementById('iframeContainer');
+    if (iframeContainer.style.display === 'none') {
+        iframeContainer.style.display = 'block';
+    } else {
+        iframeContainer.style.display = 'none';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

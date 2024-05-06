@@ -1,0 +1,17 @@
+total 449
+  0 drwxrwxrwx 1 dinesh dinesh      0 Apr  1 09:36 ai
+  4 drwxrwxrwx 1 dinesh dinesh   4096 Aug 31  2023 chatbot
+ 88 -rwxrwxrwx 1 dinesh dinesh  86636 Mar 27  2023 data.json
+328 -rwxrwxrwx 1 dinesh dinesh 335872 Apr  2 16:34 db.sqlite3
+  4 -rwxrwxrwx 1 dinesh dinesh   1063 Mar 27  2023 LICENSE
+  0 drwxrwxrwx 1 dinesh dinesh      0 Mar 23 14:43 lms
+  4 drwxrwxrwx 1 dinesh dinesh   4096 Mar 27  2023 main
+  4 -rwxrwxrwx 1 dinesh dinesh    666 Apr  2 15:11 manage.py
+  0 -rwxrwxrwx 1 dinesh dinesh      0 Apr  7 10:30 output.txt
+  1 -rwxrwxrwx 1 dinesh dinesh     28 Mar 27  2023 Procfile
+  4 -rwxrwxrwx 1 dinesh dinesh   3301 Mar 27  2023 README.md
+  4 -rwxrwxrwx 1 dinesh dinesh    838 Mar 27  2023 requirements.txt
+  4 drwxrwxrwx 1 dinesh dinesh   4096 Mar 27  2023 skillmate
+  0 drwxrwxrwx 1 dinesh dinesh      0 Mar 27  2023 static
+  0 drwxrwxrwx 1 dinesh dinesh      0 Mar 27  2023 staticfiles
+  4 drwxrwxrwx 1 dinesh dinesh   4096 Mar 29 18:58 templates
